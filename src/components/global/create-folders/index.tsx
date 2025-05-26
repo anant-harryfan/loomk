@@ -5,17 +5,18 @@ import { FolderPlusIcon } from 'lucide-react'
 import React from 'react'
 
 type Props = {
-  workspaceId: string
+    workspaceId: string
 }
 
-const CreateFolders = ({workspaceId}: Props) => {
-  const { onCreateNewFolder } = useCreateFolders(workspaceId)
-  return (
-    <Button onDoubleClick={onCreateNewFolder} onClick={()=>{console.log('ddd')}} className='bg-[#1d1d1d] text-[#707070] flex items-center gap-2 py-6 px-4 rounded-2xl'>
-      <FolderPlusIcon/>
-      create a code not worku
-    </Button>
-  )
+const CreateFolders = ({ workspaceId }: Props) => {
+    const {onCreateNewFolder} = useCreateFolders(workspaceId)
+    // console.log('oncreatefolder bhi chala')
+    return (
+        <Button onClick={onCreateNewFolder} className='bg-[#1d1d1d] text-[#707070] flex items-center gap-2 py-4 px-4 rounded-2xl'>
+            <FolderPlusIcon />
+            create a Folder
+        </Button>
+    )
 }
 
 export default CreateFolders

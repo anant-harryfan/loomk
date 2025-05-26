@@ -11,11 +11,11 @@ import Sidebar from '@/components/global/sidebar'
 import GlobalHeader from '@/components/global/global-header'
 
 type Props = { 
-  params: { workspaceid: string }, 
+  params: { workspaceId: string }, 
   children: React.ReactNode 
 }
 
-const layout = async ({ params: { workspaceid }, children }: Props) => {
+const layout = async ({ params: { workspaceId }, children }: Props) => {
   
     const auth = await onAuthenticateUser()
   
@@ -33,7 +33,7 @@ const layout = async ({ params: { workspaceid }, children }: Props) => {
             <button onClick={() => redirect('/auth/sign-in2')}>sign in wapis karle</button>
         </div>
     )
-    const hasAccess = await verifyAcessToWorkspace(workspaceid)
+    const hasAccess = await verifyAcessToWorkspace(workspaceId)
 // console.log(hasAccess.status)
     if(hasAccess.status !==200){
       console.log('notacessdashboard')
@@ -48,12 +48,12 @@ const layout = async ({ params: { workspaceid }, children }: Props) => {
 
   await query.prefetchQuery({
     queryKey: ['workspace-folders'],
-    queryFn: () => getWorkspaceFolders(workspaceid),
+    queryFn: () => getWorkspaceFolders(workspaceId),
   })
 
   await query.prefetchQuery({
     queryKey: ['user-videos'],
-    queryFn: () => getAllUserVideos(workspaceid),
+    queryFn: () => getAllUserVideos(workspaceId),
   })
 
   await query.prefetchQuery({
@@ -70,7 +70,7 @@ const layout = async ({ params: { workspaceid }, children }: Props) => {
   return (
             <HydrationBoundary state={dehydrate(query)}>
               <div className="flex  h-screen w-screen">
-                <Sidebar activeWorkspaceId={workspaceid}/>
+                <Sidebar activeWorkspaceId={workspaceId}/>
           
               <div className="w-full  p-6 overflow-y-scroll overflow-x-hidden">
                 <GlobalHeader workspace={hasAccess.data.workspace}/>

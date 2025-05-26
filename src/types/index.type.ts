@@ -37,8 +37,36 @@ export type VideosProps = {
         }| null
         id:string
         processing:boolean
+        Folder:{
+            id: string
+            name: string
+        } | null
         createdAt: Date
         title: string|null
         source: string
     }[]
 }
+export type FoldersProps = {
+    status: number
+    data: ({
+        _count: {
+            videos: number
+        }
+    } & {
+        id: string
+        name: string
+        createddAt: Date
+        workSpaceId: string | null
+
+    })[]
+  }
+
+  export type FolderProps = {
+    status: number
+    data:{
+        name: string
+        _count:{
+            videos: number
+        }
+    }
+  }

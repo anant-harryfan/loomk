@@ -85,6 +85,12 @@ export const getAllUserVideos = async (workSpaceId: string) => {
         createdAt: true,
         source: true,
         processing: true,
+        Folder:{
+          select:{
+            id: true,
+            name:true
+          }
+        },
         User: {
           select: {
             firstname: true,
@@ -97,8 +103,9 @@ export const getAllUserVideos = async (workSpaceId: string) => {
         createdAt: "asc",
       },
     });
-    console.log(videos, videos.length)
+    console.log(videos.length, '1 bar chal bas ye hai video');
     if (videos && videos.length > 0) {
+      
       return { status: 200, data: videos };
     }
 
@@ -159,65 +166,121 @@ export const createWorkspace = async (name: string) => {
       where: {
         clerkId: user.id,
       },
-    });
-
-    const workspace = await client.user.update({
-      where: {
-        clerkId: user.id,
-      },
-      data: {
-        workspace: {
-          create: {
-            name,
-            type: "PUBLIC",
+      select: {
+        subscription: {
+          select: {
+            plan: true,
           },
         },
-      }, 
+      },
     });
-    if (workspace) return {status:201, data: workspace}
-
-    return {status: 401, data: 'tera cut gaya'}
-
-
+    if (authorized?.subscription?.plan == "FREE" || "PRO") {
+      const workspace = await client.user.update({
+        where: {
+          clerkId: user.id,
+        },
+        data: {
+          workspace: {
+            create: {
+              name,
+              type: "PUBLIC",
+            },
+          },
+        },
+      });
+      if (workspace) return { status: 201, data: "Workspace Created" };
+    }
+    return { status: 401, data: "tera cut gaya" };
   } catch (error) {
-    return error
+    return { status: 500 };
   }
 };
 
-export const renameFolders = async (folderId: string, name: string)=>{
-try {
-  const folder = await client.folder.update({
-    where:{
-      id: folderId
-    },
-    data:{
-      name,
+export const renameFolders = async (folderId: string, name: string) => {
+  try {
+    const folder = await client.folder.update({
+      where: {
+        id: folderId,
+      },
+      data: {
+        name,
+      },
+    });
+    if (folder) {
+      console.log("folder rename ho gaya");
+      return { status: 200, data: "Folder Renamed" };
     }
-  })
-  if(folder) return {status: 200, data: 'Folder Renamed'}
-  return {status: 400, data: 'cant find the folder'}
-} catch (error) {
-  return {status: 500, data: 'checkout your code'}
-}
-}
+    console.log("folder rename nahi hua");
+    return { status: 400, data: "cant find the folder" };
+  } catch (error) {
+    console.log("kuch na hua");
+    return { status: 500, data: "checkout your code" };
+  }
+};
 
-export const createFolder = async (workspaceId: string)=>{
+export const createFolder = async (workspaceId: string) => {
   try {
     const isNewFolder = await client.workSpace.update({
-      where:{
+      where: {
         id: workspaceId,
       },
-      data:{
-        folders:{
-          create: { name:'bagh'}
-        }
-      }
-    })
-    if (isNewFolder){
-      return {status: 200, message: 'New codebase taiyar'}
-      console.log('newfolder')
+      data: {
+        folders: {
+          create: { name: "bagh" },
+        },
+      },
+    });
+    if (isNewFolder) {
+      // console.log("newfolder");
+      return { status: 200, message: "New codebase taiyar" };
     }
   } catch (error) {
-    return{status: 500, message:"pagal mat bana"}
+    return { status: 500, message: "pagal mat bana" };
   }
-}
+};
+
+export const getFolderInfo = async (folderId: string) => {
+  try {
+    const folder = await client.folder.findUnique({
+      where: {
+        id: folderId,
+      },
+      select: {
+        name: true,
+        _count: {
+          select: {
+            videos: true,
+          },
+        },
+      },
+    });
+    if (folder) return { status: 200, data: folder };
+    return { status: 400, data: null };
+  } catch (error) {
+    return {
+      status: 500,
+    };
+  }
+};
+
+export const movewVideoLocation = async (
+  videoId: string,
+  folderId: string,
+  workSpaceId: string
+) => {
+  try {
+    const location = await client.video.update({
+      where:{
+        id: videoId
+      },
+      data:{
+        folderId: folderId||null,
+        workSpaceId,
+      }
+    })
+    if (location) return{status: 200, data: 'folder rename sucessfull(can take the data here also)'}
+    return {status: 404, data:'ye kaise kiya mujhe bhi sikha, no folder ke nam change'}
+  } catch (error) {
+    return{status: 500, data:'ye server side error hai, ho jaega sahi'}
+  }
+};

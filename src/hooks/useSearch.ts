@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useQueryData } from "./useQueryData"
-import { searchUsers} from "@/app/action/user"
+import { searchUsers } from "@/app/action/user"
 
 export const useSearch = (key: string, type: 'USERS') => {
-    const [ query, setQuery ] = useState('')
-    const [ debounce, setDebounce ] = useState("")
-    const [ onUsers, setOnUsers ] = useState<
+    const [query, setQuery] = useState('')
+    const [debounce, setDebounce] = useState("")
+    const [onUsers, setOnUsers] = useState<
         | {
             id: string
             firstName: string | null
@@ -37,10 +37,9 @@ export const useSearch = (key: string, type: 'USERS') => {
     }, false)
     useEffect(() => {
         if (debounce) refetch()
-            if(!debounce) setOnUsers(undefined)
-                return()=>{debounce}
+        if (!debounce) setOnUsers(undefined)
+        return () => { debounce }
     }, [debounce])
 
-    return {onSearchQuery, query, isFetching,onUsers}
+    return { onSearchQuery, query, isFetching, onUsers }
 }
-

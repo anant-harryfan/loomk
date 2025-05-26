@@ -24,6 +24,8 @@ import WorkspacePlaceHolder from "./workspace-placeholder";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import InfoBar from "../info-bar";
+import { useDispatch } from "react-redux";
+import { WORKSPACES } from "@/redux/slices/workspaces";
 
 type Props = {
   activeWorkspaceId: string;
@@ -35,7 +37,7 @@ type Props = {
 export default function Sidebar({ activeWorkspaceId }: Props) {
   const router = useRouter();
   const pathName = usePathname();
-
+  const dispatch = useDispatch()
   const menuItems = MENU_ITEMS(activeWorkspaceId);
   const { data, isFetched } = useQueryData(["user-workspaces"], getWorkSpaces);
 
@@ -62,6 +64,7 @@ export default function Sidebar({ activeWorkspaceId }: Props) {
     (s) => s.id === activeWorkspaceId
   );
   if (isFetched && workspaces) {
+    dispatch(WORKSPACES({workspaces: workspaces.workspace}))
   }
   // 5. Render loading / error states
   // if (isLoading) {
@@ -222,7 +225,7 @@ export default function Sidebar({ activeWorkspaceId }: Props) {
 
   return(
     <div className="full">
- 
+     
       <div className="md:hidden fixed my-4">
     <Sheet>
       <SheetTrigger asChild className="ml-2">
@@ -238,7 +241,7 @@ export default function Sidebar({ activeWorkspaceId }: Props) {
       <div className="md:block hidden h-full">{SidebarSection}
 
       </div>
-      <InfoBar />
+      
 
     </div>
   )

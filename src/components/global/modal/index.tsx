@@ -8,9 +8,10 @@ type Props = {
     title: string
     description: string
     className?: string
+    size?:string
 }
 
-const Modal = ({ children, description, title, className, trigger }: Props) => {
+const Modal = ({ children, description, title, className, trigger, size }: Props) => {
     return (
         <Dialog>
             <DialogTrigger
@@ -19,7 +20,7 @@ const Modal = ({ children, description, title, className, trigger }: Props) => {
             >
                 {trigger}
             </DialogTrigger>
-        <DialogContent>
+            <DialogContent className={`${size}`} >
             <DialogHeader>
                 <DialogTitle>{title}</DialogTitle>
                 <DialogDescription>{description}</DialogDescription>

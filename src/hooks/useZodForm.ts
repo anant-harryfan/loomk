@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import z, { ZodSchema } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const useZodForm = (
+ const useZodForm = (
   schema: ZodSchema,
   mutation: UseMutateFunction,
   defaultValues?: any
@@ -19,11 +19,14 @@ const useZodForm = (
     defaultValues: { ...defaultValues },
   });
 
-  const onFormSubmit = handleSubmit(async (values) => {
-       mutation({ ...values });
-  });
+  const onFormSubmit = handleSubmit(async (values)=> mutation({...values}))
 
-
-  return{register, watch, reset, errors, onFormSubmit}
+  return{
+      register,
+      watch,
+      reset,
+      onFormSubmit,
+      errors
+  }
 };
-export default useZodForm;
+export default useZodForm
