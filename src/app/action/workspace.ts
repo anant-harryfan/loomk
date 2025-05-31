@@ -188,7 +188,7 @@ export const createWorkspace = async (name: string) => {
           },
         },
       });
-      if (workspace) return { status: 201, data: "Workspace Created" };
+      if (workspace) return { status: 200, data: "Workspace Created" };
     }
     return { status: 401, data: "tera cut gaya" };
   } catch (error) {
@@ -284,3 +284,78 @@ export const movewVideoLocation = async (
     return{status: 500, data:'ye server side error hai, ho jaega sahi'}
   }
 };
+
+
+export const getPreviewVideo = async (videoId: string)=>{
+try {
+  const user = await currentUser()
+  if (!user) return { status: 404 };
+
+  const video = await client.video.findUnique ({
+    where:{
+    id: videoId
+    },
+    select:{
+      title: true,
+      createdAt: true,
+      source: true,
+      description: true,
+      processing: true,
+      views: true,
+      summary: true,
+      User:{
+        select:{
+          firstname: true,
+          lastname: true,
+          image: true,
+          clerkId: true,
+          trial: true,
+          subscription:{
+            select:{
+              plan: true
+            }
+          }
+        }
+      }
+    }
+  })
+  if(video){
+    return{
+      status: 200,
+      data: video,
+      author: user.id == video.User?.clerkId?true: false,
+    }
+  }
+  
+  return{status: 404, data: 'no Video'}
+} catch (error) {
+  return{status: 500}
+}
+}
+export const getInvite = async (workspaceId: string)=>{
+try {
+
+
+  const workspace = await client.workSpace.findUnique ({
+    where:{
+    id: workspaceId
+    },
+    select:{
+      name: true,
+      createdAt: true,
+      videos: true,
+      }
+    }
+  )
+  if(workspace){
+    return{
+      status: 200,
+      data: workspace,
+    }
+  }
+  
+  return{status: 404, data: 'no workspace'}
+} catch (error) {
+  return{status: 500}
+}
+}

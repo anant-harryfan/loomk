@@ -6,7 +6,7 @@ import {
   movewVideoLocation,
 } from "@/app/action/workspace";
 import useZodForm from "./useZodForm";
-
+import { moveVideoSchema } from "@/components/global/change-videolocation/changeLSchema";
 
 export const useMoveVideos = (videoId: string, currentWorkspace: string) => {
   const { folders } = useAppSelector((state) => state.FolderReducer);
@@ -14,11 +14,11 @@ export const useMoveVideos = (videoId: string, currentWorkspace: string) => {
 
   const [isFetching, setIsFetching] = useState(false);
   const [isFolders, setIsFolders] = useState<
-    | ({ 
-        _count: { 
-            videos: number 
-        } 
-    } & {
+    | ({
+        _count: {
+          videos: number;
+        };
+      } & {
         id: string;
         name: string;
         createdAt: Date;
@@ -33,12 +33,11 @@ export const useMoveVideos = (videoId: string, currentWorkspace: string) => {
       movewVideoLocation(videoId, data.folder_id, data.workspace_id)
   );
 
-
-//   const {errors, onFormSubmit, watch, register} = useZodForm(
-//     moveVideoSchema,
-//     mutate,
-//   )
-
+  const { errors, onFormSubmit, watch, register } = useZodForm(
+    moveVideoSchema,
+    mutate,
+    { folder_id: null, workspace_id: currentWorkspace }
+  );
 
   const fetchFolders = async (workSpace: string) => {
     setIsFetching(true);
@@ -47,20 +46,29 @@ export const useMoveVideos = (videoId: string, currentWorkspace: string) => {
     setIsFolders(folders.data);
   };
 
+  useEffect(() => {
+    fetchFolders(currentWorkspace);
+  }, []);
 
 
-  useEffect(()=>{
-fetchFolders(currentWorkspace)
-  },[])
-//   useEffect(()=>{
-// const workspace = watch(async (value)=>{ 
-//     if(value.workspace_id)
-//   })
-//   },[watch])
-return {
+  useEffect(() => {
+    const workspace = watch(async (value) => {
+      if (value.workspace_id) fetchFolders(value.workspace_id);
+    });
+
+    return () => workspace.unsubscribe();
+  }, [watch]);
+
+
+
+  return {
     folders,
     workspaces,
     isFetching,
-    isFolders
-}
+    isFolders,
+    errors,
+    register,
+    isPending,
+    onFormSubmit
+  };
 };

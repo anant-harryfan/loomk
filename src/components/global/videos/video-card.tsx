@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Share2, User } from "lucide-react";
 
+
 type Props = {
   User: {
     firstname: string | null;
@@ -51,7 +52,7 @@ const VideoCard = (props: Props) => {
           </div>
         </div>
               <Link
-                  href={`/preview/${props.id}`}
+                  href={`/dashboard/${props.workspaceId}/video/${props.id}`}
                   className="hover:bg-[#252525] transition duration-150 flex flex-col justify-between h-full "
               >
                   <video

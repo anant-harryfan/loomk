@@ -14,6 +14,7 @@ type Props = {
 };
 
 const Videos = ({ folderId, videosKey, workspaceId }: Props) => {
+  console.log(videosKey, "videokety")
   const { data: videoData } = useQueryData([videosKey], () =>
     getAllUserVideos(workspaceId)
   );

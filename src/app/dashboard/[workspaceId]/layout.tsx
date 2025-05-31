@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-query'
 import Sidebar from '@/components/global/sidebar'
 import GlobalHeader from '@/components/global/global-header'
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 
 type Props = { 
   params: { workspaceId: string }, 
@@ -69,13 +70,18 @@ const layout = async ({ params: { workspaceId }, children }: Props) => {
 // ab kya itna timewaste karu vo ghatiya ki cheezo ke liye. bhai sahab. dekh raho ho kya chal raha hai tum logo ko behudi wali feelings dene ke liye. marketing bhi iski sahi karo. chumtiya pa cheezo ko pagalpanti define kar rahe. in sabh me time waste na karke kam ki cheezo me karo!!!!!!!!!!!. jabh screen recorder bola hai to screen recorder hi chaiye. ab uske liye sign in wagera karne ki zarurat nahi
   return (
             <HydrationBoundary state={dehydrate(query)}>
-              <div className="flex  h-screen w-screen">
+              <div className="flex   h-screen w-screen">
+      <ResizablePanelGroup className="" direction="horizontal">
+        <ResizablePanel>
                 <Sidebar activeWorkspaceId={workspaceId}/>
-          
-              <div className="w-full  p-6 overflow-y-scroll overflow-x-hidden">
-                <GlobalHeader workspace={hasAccess.data.workspace}/>
-                <div className='mt-4'>{children}</div>
+          </ResizablePanel>
+          <ResizableHandle className="bg-r" />
+          <ResizablePanel defaultSize={79}>
+              <div className="w-full   overflow-y-visible overflow-x-hidden ">
+                <div className=' '>{children}</div>
               </div>
+                        </ResizablePanel>
+                      </ResizablePanelGroup>
       </div>
             </HydrationBoundary>
         )

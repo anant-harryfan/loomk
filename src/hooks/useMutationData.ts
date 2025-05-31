@@ -24,8 +24,9 @@ export const useMutationData =  (
 
       if (onSuccess) onSuccess()
 
-        return toast(data?.status === 200 ? "Sucess" : "Error", {
-          description: data?.data,
+        return toast(data?.status === 200 || data?.status ===201 ? "Sucess" : `Error ${data}`, {
+          description: data?.data as string,
+          // description: data?.data,
         })
 
       

@@ -180,7 +180,7 @@ export default function Sidebar({ activeWorkspaceId }: Props) {
       }
       <nav className="w-full">
         
-        <ul className="h-[150px] overflow-auto overflow-x-hidden fade-layer">
+        <ul className="h-[450px] overflow-auto overflow-x-hidden fade-layer">
    
           {workspaces.workspace.length > 0 &&
             workspaces.workspace.map(

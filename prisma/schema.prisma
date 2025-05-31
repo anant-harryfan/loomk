@@ -24,7 +24,24 @@ model User {
   sender         Invite[]     @relation("sender")
   receiver       Invite[]     @relation("receiver") 
   trial          Boolean      @default(false)
+  firstView          Boolean      @default(false)
+  comment        Comment[]
 }
+
+model Comment{
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  comment       String
+  reply         Comment[]   @relation("reply")
+  Comment       Comment?    @relation("reply", fields: [commentId], references: [id])
+  commentId     String?     @db.Uuid
+  User         User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // userId       String?      @unique @db.Uuid // agar ek user se ek message chahiye to karlo ye
+  userId       String?      @db.Uuid
+  Video        Video?        @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  videoId       String?      @db.Uuid
+  createdAt    DateTime     @default(now())
+}
+
 
 model Subscription {
   id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
@@ -43,7 +60,7 @@ model Media {
   camera       String?
   preset       PRESET   @default(SD)
   user         User?    @relation(fields: [userId], references: [id])
-  userId       String?  @unique @db.Uuid
+  userId       String?  @unique @db.Uuid // ye dekh lena gadbadh hue to
 }
 
 model WorkSpace {
@@ -58,6 +75,9 @@ model WorkSpace {
   members      Member[]     
   invite       Invite[]
 }
+// model WorkSpacePreview{
+  
+// }
 model Folder{
   id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name         String   @default("Untitled Folder")
@@ -81,6 +101,7 @@ model Video {
   workSpaceId  String?   @db.Uuid
   views        Int       @default(0)
   summary      String?
+  Comment      Comment[]
 }
 
 model Member {
