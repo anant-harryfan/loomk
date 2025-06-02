@@ -6,7 +6,7 @@ export async function GET(
   req: NextRequest,
   { params:{id} }: { params: { id: string } }
 ) {
-    // console.log('yetry catch ke to uper hi hai')
+    // //console.log('yetry catch ke to uper hi hai')
 try{  const userProfile = await client.user.findUnique({
     where: {
       clerkId: id,
@@ -47,7 +47,7 @@ try{  const userProfile = await client.user.findUnique({
     if (createUser) return NextResponse.json({ status: 201, user: createUser })
     return NextResponse.json({ status: 400 })}
     catch(error){
-        console.log('error hua haiiiii ', error)
+        //console.log('error hua haiiiii ', error)
     }
 
 }

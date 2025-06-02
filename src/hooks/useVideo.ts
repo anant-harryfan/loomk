@@ -26,6 +26,6 @@ export const useVideoComment = (videoId: string, commentId?: string) => {
     createCommentSchema,
     mutate
     )
-console.log(errors, isPending, " YE DEKH ERRORS WAGER DEKH")
+//console.log(errors, isPending, " YE DEKH ERRORS WAGER DEKH")
     return{register, errors, onFormSubmit, isPending}
 };

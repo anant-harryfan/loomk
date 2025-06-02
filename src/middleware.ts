@@ -13,24 +13,24 @@ const isProtectedRoutes = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, req)=>{
     const origin = (req.headers.get('origin') ?? '').replace(/\/$/, '');
-    console.log('Origin:', origin);
+    //console.log('Origin:', origin);
 
     // Normalize allowed origins by removing trailing slashes
     const isAllowedOrigin = allowedOrigins.some(allowedOrigin =>
         allowedOrigin.replace(/\/$/, '') === origin
     );
-    console.log('inmiddleware', isAllowedOrigin);
+    //console.log('inmiddleware', isAllowedOrigin);
     if (req.method == 'OPTIONS'){
         const preflightHeaders = {
             ... (isAllowedOrigin && {'Access-Control-Allow-Origin': origin}),
             ...corsOption,
         }
-        console.log('ye ho gaya ')
+        //console.log('ye ho gaya ')
         return  NextResponse.json({}, {headers: preflightHeaders})
     }
 
     if (isProtectedRoutes(req)){
-        console.log(req, "protekldfjadfk")
+        //console.log(req, "protekldfjadfk")
         auth.protect()
     }
 
@@ -38,7 +38,7 @@ export default clerkMiddleware(async (auth, req)=>{
 
     if(isAllowedOrigin){
         response.headers.set('Access-Control-Allow-Origin', origin)
-        console.log('allowed ', origin)
+        //console.log('allowed ', origin)
     }
 
     Object.entries(corsOption).forEach(([key, value])=>{

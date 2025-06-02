@@ -20,12 +20,12 @@ const FolderInfo = ({folderId}: Props) => {
   const [onRename, setOnRename] = useState(false);
 
   const Rename = () => {
-    // console.log(onRename)
+    // //console.log(onRename)
     
     setOnRename(true);
   }
   const Renamed = () => {
-    // console.log(onRename)
+    // //console.log(onRename)
     setOnRename(false);
   }
 
@@ -38,15 +38,15 @@ const FolderInfo = ({folderId}: Props) => {
 
   const handleNameClick = (e: React.MouseEvent<HTMLParagraphElement>) => {
     e.stopPropagation();
-    console.log('rename chalu')
+    //console.log('rename chalu')
     Rename()
   };
   const { latestVariables } = useMutationDataState(['rename-folder']) // by this flicker wont happen
   const updateFoldername = (e: React.FocusEvent<HTMLInputElement>) => {
-    // console.log('THE UPDATE FOLDER NAME IS RUNNING')
+    // //console.log('THE UPDATE FOLDER NAME IS RUNNING')
     if (inputRef.current && folderCardRef.current) {
       if (inputRef.current.value) {
-        // console.log(inputRef.current.value)
+        // //console.log(inputRef.current.value)
         mutate({ name: inputRef.current.value });
         mutate({ name: inputRef.current.value, folderId }); // by this flicker wont happen
       } else Renamed();

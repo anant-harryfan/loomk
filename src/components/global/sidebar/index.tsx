@@ -45,15 +45,15 @@ export default function Sidebar({ activeWorkspaceId }: Props) {
     ["user-notifications"],
     getNotifications
   );
-  console.log(notifications);
+  //console.log(notifications);
   const { data: workspaces } = data as WorkSpaceProps;
   const { data: count } = notifications as NotificationProps;
 
-  console.log(
-    "🚀 ~ file: index.tsx:50 ~ Sidebar ~ data:",
-    workspaces,
-    notifications
-  );
+  // //console.log(
+  //   "🚀 ~ file: index.tsx:50 ~ Sidebar ~ data:",
+  //   workspaces,
+  //   notifications
+  // );
 
   // 4. Handlers
   const onChangeActiveWorkspace = (value: string) => {

@@ -14,6 +14,6 @@ export const useQueryData = (
     queryKey,
     queryFn,
   })
-  console.log(data, `dataaaaaa ${queryKey}`)
+  //console.log(data, `dataaaaaa ${queryKey}`)
   return { data, isPending, isFetched, refetch, isFetching }
 }

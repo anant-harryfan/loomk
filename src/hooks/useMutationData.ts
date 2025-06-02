@@ -23,7 +23,7 @@ export const useMutationData =  (
     onSuccess(data) {
 
       if (onSuccess) onSuccess()
-
+console.log(data)
         return toast(data?.status === 200 || data?.status ===201 ? "Sucess" : `Error ${data}`, {
           description: data?.data as string,
           // description: data?.data,
@@ -36,7 +36,7 @@ export const useMutationData =  (
       return await client.invalidateQueries({ queryKey: [queryKey] });
     },
   });
-  // console.log(mutate, isPending)
+  // //console.log(mutate, isPending)
   return { mutate, isPending };
 };
 
@@ -51,6 +51,6 @@ export const useMutationDataState = (mutationKey: MutationKey) => {
     },
   });
   const latestVariables = data[data.length-1]
-  // console.log(latestVariables, 'main wala latest')
+  // //console.log(latestVariables, 'main wala latest')
   return {latestVariables}
 };

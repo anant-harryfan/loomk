@@ -35,9 +35,9 @@ const layout = async ({ params: { workspaceId }, children }: Props) => {
         </div>
     )
     const hasAccess = await verifyAcessToWorkspace(workspaceId)
-// console.log(hasAccess.status)
+// //console.log(hasAccess.status)
     if(hasAccess.status !==200){
-      console.log('notacessdashboard')
+      //console.log('notacessdashboard')
         redirect(`/DFDFSSDFDSF`)
     }
 

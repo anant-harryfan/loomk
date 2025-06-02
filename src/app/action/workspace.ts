@@ -6,38 +6,25 @@ import { currentUser } from "@clerk/nextjs/server";
 export const verifyAcessToWorkspace = async (workspaceId: string) => {
   try {
     const user = await currentUser();
-    // console.log( `USERRRRRRR:  `, user)
+    // //console.log( `USERRRRRRR:  `, user)
     if (!user) return { status: 404 };
-    // console.log(` CLIENT KI WORKSPACE ID::::::   ${client.workSpace.findUnique}`)
+    // //console.log(` CLIENT KI WORKSPACE ID::::::   ${client.workSpace.findUnique}`)
     const isUserInWorkspace = await client.workSpace.findUnique({
       where: {
         id: workspaceId,
-        OR: [
-          {
             User: {
               clerkId: user.id,
             },
-          },
-          {
-            members: {
-              every: {
-                User: {
-                  clerkId: user.id,
-                },
-              },
-            },
-          },
-        ],
       },
     });
-    console.log(` ISUSERINWORKSPACE???::::::     ${isUserInWorkspace}`);
-    console.log("verified");
+    //console.log(` ISUSERINWORKSPACE???::::::     ${isUserInWorkspace}`);
+    //console.log("verified");
     return {
       status: 200,
       data: { workspace: isUserInWorkspace },
     };
   } catch (error) {
-    console.log("error");
+    //console.log("error");
     return {
       status: 403,
       data: { workspace: null },
@@ -103,7 +90,7 @@ export const getAllUserVideos = async (workSpaceId: string) => {
         createdAt: "asc",
       },
     });
-    console.log(videos.length, '1 bar chal bas ye hai video');
+    //console.log(videos.length, '1 bar chal bas ye hai video');
     if (videos && videos.length > 0) {
       
       return { status: 200, data: videos };
@@ -120,7 +107,7 @@ export const getWorkSpaces = async () => {
     const user = await currentUser();
 
     if (!user) return { status: 404 };
-    // console.log("GETWORKSPACEuSERRRRR: ", user)
+    // //console.log("GETWORKSPACEuSERRRRR: ", user)
     const workspaces = await client.user.findUnique({
       where: {
         clerkId: user.id,
@@ -207,13 +194,13 @@ export const renameFolders = async (folderId: string, name: string) => {
       },
     });
     if (folder) {
-      console.log("folder rename ho gaya");
+      //console.log("folder rename ho gaya");
       return { status: 200, data: "Folder Renamed" };
     }
-    console.log("folder rename nahi hua");
+    //console.log("folder rename nahi hua");
     return { status: 400, data: "cant find the folder" };
   } catch (error) {
-    console.log("kuch na hua");
+    //console.log("kuch na hua");
     return { status: 500, data: "checkout your code" };
   }
 };
@@ -231,7 +218,7 @@ export const createFolder = async (workspaceId: string) => {
       },
     });
     if (isNewFolder) {
-      // console.log("newfolder");
+      // //console.log("newfolder");
       return { status: 200, message: "New codebase taiyar" };
     }
   } catch (error) {

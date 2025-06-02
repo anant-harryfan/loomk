@@ -29,7 +29,7 @@ export const onAuthenticateUser = async () => {
   try {
     const user = await currentUser();
     if (!user) {
-      console.log("no user");
+      //console.log("no user");
       return { status: 403 };
     }
 
@@ -51,7 +51,7 @@ export const onAuthenticateUser = async () => {
     if (userExist) {
       return { status: 200, user: userExist };
     }
-    console.log("newUser ke phele");
+    //console.log("newUser ke phele");
     const newUser = await client.user.create({
       data: {
         clerkId: user.id,
@@ -74,12 +74,12 @@ export const onAuthenticateUser = async () => {
         workspace: true,
       },
     });
-    console.log(newUser);
+    //console.log(newUser);
     if (newUser) {
-      console.log("new User sahi");
+      //console.log("new User sahi");
       return { status: 201, user: newUser };
     }
-    console.log("new User Dikkat");
+    //console.log("new User Dikkat");
 
     return { status: 400 };
   } catch (error) {
@@ -106,10 +106,10 @@ export const getNotifications = async () => {
     });
     if (notifications && notifications.notifications.length > 0)
       return { status: 200, data: notifications };
-    console.log(notifications, 404);
+    //console.log(notifications, 404);
     return { status: 404, data: [0] };
   } catch (error) {
-    console.log(409);
+    //console.log(409);
     return { status: 400, data: [] };
   }
 };
@@ -165,7 +165,7 @@ export const createCommentAndReply = async (
 ) => {
   try {
     if(commentId){
-      console.log(commentId, "YE HAI TERE BAP KA COMMENT")
+      //console.log(commentId, "YE HAI TERE BAP KA COMMENT")
     const reply = await client.comment.update({
       where: {
         id: commentId,
@@ -180,12 +180,12 @@ export const createCommentAndReply = async (
         },
       },
     });
-    console.log("Reply", reply)
+    //console.log("Reply", reply)
     if (reply) {
       return { status: 200, data: "Reply posted" };
     }
   }
-console.log('ye hai ham new comment ke uper')
+//console.log('ye hai ham new comment ke uper')
     const newComment = await client.video.update({
       where: {
         id: videoId,
@@ -199,12 +199,12 @@ console.log('ye hai ham new comment ke uper')
         },
       },
     });
-    // console.log(newComment, "NEW COMMENT")
+    // //console.log(newComment, "NEW COMMENT")
     if (newComment) return { status: 200, data: "New Comment added" };
-    console.log('comment new repl me dikatfdfsfsdfd')
+    //console.log('comment new repl me dikatfdfsfsdfd')
   } catch (error) {
-    console.log('comment new repl me dikat')
-    console.log(error, '\n \n \n \n')
+    //console.log('comment new repl me dikat')
+    //console.log(error, '\n \n \n \n')
     return { status: 500 };
   }
 };
@@ -244,7 +244,7 @@ export const getVideoComments = async (Id: string) => {
         User: true,
       },
     });
-// console.log(comments, 'COMMENTSSSSS')
+// //console.log(comments, 'COMMENTSSSSS')
  return { status: 200, data: comments };
   } catch (error) {
     return { status: 500 };
@@ -260,7 +260,7 @@ export const inviteMembers = async (
   try {
     const user = await currentUser()
     if (!user) return { status: 404 }
-    console.log('send info ke uper')
+    //console.log('send info ke uper')
     const senderInfo = await client.user.findUnique({
       where: {
         clerkId: user.id
@@ -270,7 +270,7 @@ export const inviteMembers = async (
       }
     })
     if (senderInfo?.id) {
-      console.log("sendInfo.id confirm", senderInfo?.id)
+      //console.log("sendInfo.id confirm", senderInfo?.id)
       const workspace = await client.workSpace.findUnique({
         where: {
           id: workspaceId
@@ -280,7 +280,7 @@ export const inviteMembers = async (
         }
       })
       if (workspace) {
-        console.log("workspace confirm", workspace)
+        //console.log("workspace confirm", workspace)
         const invitation = await client.invite.create({
           data: {
             senderId: senderInfo.id, 
@@ -305,11 +305,11 @@ export const inviteMembers = async (
               }
             }
         })
-        console.log('workspace ke nichhe', notification)
+        //console.log('workspace ke nichhe', notification)
       }
-      console.log('senderinfo wala khatam')
+      //console.log('senderinfo wala khatam')
     }
-    console.log('hogaya')
+    //console.log('hogaya')
   } catch (error) {
 
   }

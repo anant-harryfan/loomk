@@ -19,15 +19,14 @@ const Folder = ({ name, id, optimistic, count }: Props) => {
     const pathName = usePathname();
     const router = useRouter();
 
-    const handleFolderClick = () => {
-        router.push(`${pathName}/folder/${id}`);
-    };
+    // const handleFolderClick = () => {
+    //     router.push(`${pathName}/folder/${id}`);
+    // };
       const { latestVariables } = useMutationDataState(['rename-folder']) // by this flicker wont happen
     
     return (
         <div
-            onClick={(handleFolderClick)}
-            className={cn(" flex justify-between hover:bg-neutral-800 cursor-pointer transition duration-150 items-center gap-2  min-w-[250px] py-3 px-4 rounded-lg border-[1px]")}
+            className={cn(" flex justify-between bg-neutral-800 cursor-pointer transition duration-150 items-center gap-2  min-w-[250px] py-3 px-4 ")}
         >
             <div className="flex flex-col gap-[1px]">
 
@@ -38,7 +37,7 @@ const Folder = ({ name, id, optimistic, count }: Props) => {
                 
                 <span className="text-sm text-neutral-700">{count || 0}</span>
             </div>
-            <FolderIcon color="#707070" fill="#707070" />
+            
         </div>
     );
 };

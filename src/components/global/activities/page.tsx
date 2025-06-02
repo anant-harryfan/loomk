@@ -16,7 +16,7 @@ const Activites = ({author, videoId}: Props) => {
     )
     const {data: comments} = data as VideoCommentProps
   return (
-      <div className=''>
+      <div className='max-w-[40vh] overflow-auto'>
         <CommentForm videoId={videoId} author={author}/>  
     {comments.map((comment)=>(
         <CommentCard

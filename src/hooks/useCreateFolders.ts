@@ -10,8 +10,8 @@ export const useCreateFolders = (workspaceId: string) => {
 
     const onCreateNewFolder = () => {
         mutate({ name: 'Bagh', id: 'optimitsitc--id' }) //untitled
-        // console.log(mutate({ name: 'Untitled', id: 'optimitsitc--id' }), 'mutate ka bhai')
+        // //console.log(mutate({ name: 'Untitled', id: 'optimitsitc--id' }), 'mutate ka bhai')
     }
-    console.log('ONCREATEUIONNEWFOLDER')
+    //console.log('ONCREATEUIONNEWFOLDER')
     return {onCreateNewFolder}
 };

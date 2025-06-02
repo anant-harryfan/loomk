@@ -41,7 +41,6 @@ model User {
 // }
 model Channel{
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  type         Type
   name         String
   chats        Chatam[]
   User         User?    @relation(fields: [userId], references: [id])

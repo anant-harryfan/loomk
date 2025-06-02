@@ -10,7 +10,7 @@ type Props = {
 
 const CreateFolders = ({ workspaceId }: Props) => {
     const {onCreateNewFolder} = useCreateFolders(workspaceId)
-    // console.log('oncreatefolder bhi chala')
+    // //console.log('oncreatefolder bhi chala')
     return (
         <Button onClick={onCreateNewFolder} className='bg-[#1d1d1d] text-[#707070] flex items-center gap-2 py-4 px-4 rounded-2xl'>
             <FolderPlusIcon />

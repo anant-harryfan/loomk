@@ -17,28 +17,26 @@ type Props = {
 const page = ({params}: Props) => {
   return (
     <div>
-    <Tabs defaultValue='videos' className='mt-6'>
-      <div className="flex w-full justify-between items-center">
-        <TabsList className='bg-transparent gap-2, pl-0'>
-          <TabsTrigger className='p-[13px] px-6 rounded-full data-[state=active]:bg-[#252525]' value='videos'>Videos</TabsTrigger>
-            <TabsTrigger className='p-[13px] px-6 rounded-full data-[state=active]:bg-[#252525]' value='archive'>Archive</TabsTrigger>
-        </TabsList>
-        <div className="flex gap-x-3">
+        <div className="flex mt-10 gap-x-3">
           
           <CreateWorkspace/>
           <CreateFolders workspaceId = {params.workspaceId}/>
         </div>
+    <Tabs defaultValue='videos' className='mt-6'>
+      <div className="flex w-full flex-col justify-between items-center">
+          <Folders workspaceId={params.workspaceId} />
       </div>
+     
       <section className='py-9'>
         <TabsContent value='videos'>
-          <Folders workspaceId={params.workspaceId}/>
+        <Videos videosKey='user-videos' workspaceId={params.workspaceId} />
         </TabsContent>
       </section>
-      <section className='py-9'>
-        <TabsContent value='videos'>
- {/* <Videos videosKey='folder-videos' workspaceId={params.workspaceId} /> */}
-        </TabsContent>
-      </section>
+        <section className='py-9'>
+          <TabsContent value='videos'>
+            
+          </TabsContent>
+        </section>
     </Tabs>
     </div>
   )

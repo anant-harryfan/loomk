@@ -2,10 +2,12 @@ import React from 'react'
 
 type Props = {}
 
-const HomePage = (props: Props) => {
+const MujhChat = (props: Props) => {
   return (
-    <div>HomePage</div>
+    <div>
+        
+    </div>
   )
 }
 
-export default HomePage
+export default MujhChat

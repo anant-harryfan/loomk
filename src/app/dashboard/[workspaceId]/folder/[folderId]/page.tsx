@@ -23,6 +23,7 @@ const page = async ({params:{folderId, workspaceId}}: Props) => {
     <HydrationBoundary state={dehydrate(query)}>
         <FolderInfo folderId={folderId}/>
         <Videos workspaceId={workspaceId} folderId={folderId} videosKey='folder-videos'/>
+        
     </HydrationBoundary>
   )
 }

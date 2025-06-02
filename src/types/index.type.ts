@@ -153,3 +153,21 @@ export type VideoCommentProps = {
   videoId: string | null;
     }[]
 };
+export type ChannelChatams = {
+  data: { 
+  id: string;
+  chatam: string;
+  chatamId: string | null;
+  channelId: string | null;
+    }[]
+};
+
+export type UserChannel ={
+  data: {
+    id: string, 
+    name: string, 
+    chats: string,
+    user: string, 
+    userId: string
+  }[]
+}
