@@ -24,15 +24,17 @@ type Props = {
   source: string;
   processing: boolean;
   workspaceId: string;
+
 };
 
 const VideoCard = (props: Props) => {
 
   return (
+
     <Loader
       className="bg-[#171717] flex justify-center items-center border-[1px] border-[#252525] rounded-xl"
       state={props.processing}
-    >
+      >
       <div className=" dragu group overflow-hidden cursor-pointer bg-[#171717] relative border-[1px] border-[#252525] flex flex-col rounded-sm">
         <div className=" absolute top-3 right-3 z-500 gap-x-0.01 hidden group-hover:flex">
        
@@ -41,7 +43,6 @@ const VideoCard = (props: Props) => {
             videoId={props.id}
             variant={'ghost'}
           />
-  
   <div id="draggH" draggable={true}>
                   <CardMenu
                       currentFolder={props.Folder?.id}
@@ -49,7 +50,7 @@ const VideoCard = (props: Props) => {
                       currentWorkspace={props.workspaceId}
                       videoId={props.id}
                   />
-          </div>
+          </div> 
         </div>
               <Link
                   href={`/dashboard/${props.workspaceId}/video/${props.id}`}
@@ -87,10 +88,11 @@ const VideoCard = (props: Props) => {
                     </div>
                   </div>
               </Link>
-      </div>
+              </div>
+              
+              </Loader>
 
-    </Loader>
-  );
-};
+            );
+          };
 
 export default VideoCard;

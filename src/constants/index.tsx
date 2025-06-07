@@ -7,7 +7,7 @@ import { VideoEditor } from "@/components/icons/videoEditor";
 export const MENU_ITEMS = (
   workspaceId: string
 ): { title: string; href: string; icon: React.ReactNode }[] => [
-  { title: "Home", href: `/dashboard/${workspaceId}/home?`, icon: <Home /> },
+  { title: "Home", href: `/dashboard/${workspaceId}/homepage?`, icon: <Home /> },
   {
     title: "Tv",
     href: `/dashboard/${workspaceId}`,
@@ -25,7 +25,7 @@ export const MENU_ITEMS = (
   },
   {
     title: "VideoEditor",
-    href: `/dashboard/${workspaceId}/videoeditor?`,
+    href: `/dashboard/${workspaceId}/videoEditor?`,
     icon: <VideoEditor />,
   },
 ]; // capital I dhyan rakhna

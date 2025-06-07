@@ -27,6 +27,7 @@ model User {
   firstView          Boolean      @default(false)
   comment        Comment[]
   channel        Channel[] // Server[]
+  chatpage       ChatPage[]
 }
 
 // model Server{
@@ -101,6 +102,8 @@ model WorkSpace {
   videos       Video[]
   members      Member[]     
   invite       Invite[]
+  files        files[]
+  htmlc       htmlc[]
 }
 // model WorkSpacePreview{
   
@@ -160,6 +163,33 @@ model Invite {
   accepted     Boolean   @default(false)
 }
 
+model ChatPage {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  code         String    
+  name         String
+  User         User?    @relation(fields: [userId], references: [id])
+  userId       String?  @db.Uuid
+}
+
+
+model files {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   createdAt    DateTime  @default(now())
+    title        String?   @default("Untitled Video")
+    data       String
+    inTrash    Boolean
+    logo      String 
+    WorkSpace    WorkSpace? @relation(fields: [workSpaceId], references: [id])
+  workSpaceId  String?   @db.Uuid
+}
+
+model htmlc{
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  WorkSpace    WorkSpace? @relation(fields: [workSpaceId], references: [id])
+  workSpaceId  String?   @db.Uuid  @unique
+  code          String   @default("a")
+}
+
 enum Type {
   PERSONAL
   PUBLIC
@@ -174,3 +204,270 @@ enum SUBSCRIPTION_PLAN {
   PRO
   FREE
 }
+
+// model india{
+//     id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     code   String
+//     archrya prafula chandra ray
+// }
+// model ganeshPuran {
+//     id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     puran        String 
+//     teachings    String
+//     code         String
+//     chapter      Int
+//     Date         String
+
+// }
+// model TamilNadu {
+//   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//   city          TamilNaduCity[]
+// }
+// model TamilNaduCity{
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state        TamilNadu?  @relation(fields: [stateId], references: [id])
+//     stateId      String  @db.Uuid
+//     name         String
+//     ariyalur     ariyalur[]
+//     chengalpattu Chengalpattu[]
+//     chennai     Chennai[]
+//     coimbatore  Coimbatore[]
+//     cuddalore   Cuddalore[] 
+//     Dharmapuri   Dharmapuri []
+//     Dindigul  Dindigul []
+//     Periyar  Periyar []
+//     Kallakurichi  Kallakurichi []
+//     Kancheepuram Kancheepuram []
+//     Kanniyakumari Kanniyakumari []
+//     Karur  Karur[]
+//     Krishnagiri  Krishnagiri []
+//     Madurai  Madurai []
+//     Nagapattinam  Nagapattinam []
+//     Namakkal  Namakkal []
+//     Mayiladuthurai  Mayiladuthurai []
+//     Perambalur  Perambalur []
+//     Pudukkottai  Pudukkottai []
+//     Ramanathapuram  Ramanathapuram []
+//     Ranipet  Ranipet []
+//     Salem Salem []
+//     Tenkasi  Tenkasi []
+//     Thanjavur  Thanjavur []
+//     Neelakurinji  Neelakurinji []
+//     Theni  Theni []
+//     Thiruvallur  Thiruvallur []
+//     Thiruvarur  Thiruvarur []
+//     Thoothukkudi  Thoothukkudi []
+//     Tiruchirappalli  Tiruchirappalli []
+//     Tirunelveli  Tirunelveli []
+//     Tirupathur  Tirupathur []
+//     Tiruppur  Tiruppur []
+//     Shivganga  Shivaganga[]
+//     Tiruvannamalai Tiruvannamalai []
+//     Sripuram Sripuram[]
+//     Viluppuram  Viluppuram []
+//     Virudhunagar Virudhunagar []
+//     GANGAIKONDA_CHOLAPURAM GANGAIKONDA_CHOLAPURAM[]
+// }
+// model GANGAIKONDA_CHOLAPURAM {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Virudhunagar {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Viluppuram {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Sripuram {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Tiruvannamalai  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Tiruppur  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+
+// model Tirupathur {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Tirunelveli  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Tiruchirappalli  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Thoothukkudi  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Thiruvarur   {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Thiruvallur   {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Theni   {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Neelakurinji  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Thanjavur  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Tenkasi  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Shivaganga  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Salem  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Ranipet  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model ariyalur{
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//     Id    String  @db.Uuid
+//     code       String 
+// }
+
+// model Pudukkottai  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Ramanathapuram   {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Perambalur  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Namakkal   {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Nagapattinam    {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Mayiladuthurai   {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Madurai  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Chengalpattu {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Chennai  {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Coimbatore   {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Cuddalore    {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Dharmapuri     {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Dindigul     {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Periyar     {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Kallakurichi      {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Kancheepuram     {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Kanniyakumari      {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Karur       {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+// model Krishnagiri      {
+//     id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     state         TamilNaduCity? @relation(fields: [Id], references: [id])
+//    Id   String @db.Uuid
+// }
+
+// model rakhiGadi {
+//     id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     code         String
+// }

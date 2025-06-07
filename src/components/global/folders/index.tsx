@@ -10,7 +10,7 @@ import { number } from "zod";
 import { FoldersProps } from "@/types/index.type";
 import { useDispatch } from "react-redux";
 import { FOLDERS } from "@/redux/slices/folders";
-import { TabsList, TabsTrigger } from "@radix-ui/react-tabs";
+import { TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 
 
 type Props = {
@@ -35,32 +35,28 @@ const Folders = ({ workspaceId }: Props) => {
 
 
   return (
-    <TabsList className='bg-transparent gap-2 w-full pl-0'>
-    <div className="flex flex-col w-full gap-8 overflow-y-auto max-h-[400px] ">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4 ">
-          <Ship />
-          VideoCode
-        </div>
+    <div>
+    <TabsList className='bg-transparent gap-2  '>
+    {/* <div className="flex flex-col w-full gap-8 overflow-y-auto max-h-[400px] "> */}
 
-      </div>
         
-      <section className={cn(status !== 200 && 'justify-center', "grid  grid-template-cols  gap-x-30 gap-y-5 w-full")}>
+      <section className={cn(status !== 200 && 'justify-center', " flex flex-row-reverse overflow-x-auto  ")}>
         {status !== 200 ? (
           <p className="text-neutral-700">CODE KARLE BEWADE</p>
         ) : (
           <>
             {latestVariables && latestVariables.status == 'pending' && (
-                  <TabsTrigger className='p-[13px] px-6 rounded-full data-[state=active]:bg-[#252525]' value={latestVariables.variables.name}>
+                  <TabsTrigger  className='resize' value={latestVariables.variables.name}>
               <Folder
                 name={latestVariables.variables.name}
                 id={latestVariables.variables.id}
                 optimistic
+                
               />
               </TabsTrigger>
             )}
-            {folders.map((folder) => (
-              <TabsTrigger className='p-[13px] px-6 rounded-full data-[state=active]:bg-[#252525]' value={folder.name}>
+            {folders.map((folder, key) => (
+              <TabsTrigger className='resize ' value={folder.name} key={key}>
               <Folder
                 name={folder.name}
                 count={folder._count.videos}
@@ -72,8 +68,10 @@ const Folders = ({ workspaceId }: Props) => {
           </>
         )}
       </section>
-    </div>
+
     </TabsList>
+
+    </div>
   );
 };
 

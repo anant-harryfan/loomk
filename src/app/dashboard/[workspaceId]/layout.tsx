@@ -1,7 +1,7 @@
 import React from 'react'
-import { getNotifications, onAuthenticateUser } from '@/app/action/user'
+import { getAllVideo, getNotifications, onAuthenticateUser } from '@/app/action/user'
 import { redirect } from 'next/navigation'
-import { getAllUserVideos, getWorkspaceFolders, getWorkSpaces, verifyAcessToWorkspace } from '@/app/action/workspace'
+import { getAllUserVideos, getFolderInfo, getWorkspaceFolders, getWorkSpaces, verifyAcessToWorkspace } from '@/app/action/workspace'
 import {
              dehydrate,
              HydrationBoundary,
@@ -66,18 +66,23 @@ const layout = async ({ params: { workspaceId }, children }: Props) => {
     queryKey: ['user-notifications'],
     queryFn: () => getNotifications(),
     })
+  await query.prefetchQuery({
+    queryKey: ['all_Video'],
+    queryFn: () => getAllVideo(),
+    })
+
   
 // ab kya itna timewaste karu vo ghatiya ki cheezo ke liye. bhai sahab. dekh raho ho kya chal raha hai tum logo ko behudi wali feelings dene ke liye. marketing bhi iski sahi karo. chumtiya pa cheezo ko pagalpanti define kar rahe. in sabh me time waste na karke kam ki cheezo me karo!!!!!!!!!!!. jabh screen recorder bola hai to screen recorder hi chaiye. ab uske liye sign in wagera karne ki zarurat nahi
   return (
             <HydrationBoundary state={dehydrate(query)}>
               <div className="flex   h-screen w-screen">
-      <ResizablePanelGroup className="" direction="horizontal">
-        <ResizablePanel>
+      <ResizablePanelGroup className="" direction="horizontal">     
+
                 <Sidebar activeWorkspaceId={workspaceId}/>
-          </ResizablePanel>
-          <ResizableHandle className="bg-r" />
+          
+          <ResizableHandle color='r' className="bg-r  " />
           <ResizablePanel defaultSize={79}>
-              <div className="w-full   overflow-y-visible overflow-x-hidden ">
+              <div className="w-full h-screen  overflow-y-scroll overflow-x-hidden ">
                 <div className=' '>{children}</div>
               </div>
                         </ResizablePanel>

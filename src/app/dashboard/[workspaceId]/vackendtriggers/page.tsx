@@ -26,8 +26,8 @@ const Notifications = (props: Props) => {
             date 
           </p>
         
-      {/* {notification.notification.map((n)=>(
-        <DraggableCardBody>
+      {notification.notification.map((n)=>(
+        <DraggableCardBody >
         <div
         key={n.id}
         className='border-2 flex gap-x-3 items-center rounded-lg p-3'
@@ -40,7 +40,7 @@ const Notifications = (props: Props) => {
           <p>{n.content}</p>
         </div>
         </DraggableCardBody>
-      ))} */}
+      ))}
       </DraggableCardContainer>
     </div>
   )

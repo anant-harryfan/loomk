@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images:{
+domains:[
+  'uplaodthing.com',
+  'utfs.io'
+]
+  },
   /* config options here */
   experimental: {
     serverActions: {

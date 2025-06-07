@@ -14,7 +14,6 @@ import {
 export const DraggableCardBody = ({
   className,
   children,
-
 }: {
   className?: string;
   children?: React.ReactNode;

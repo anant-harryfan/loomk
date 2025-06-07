@@ -24,7 +24,7 @@ const Videos =  ({ folderId, videosKey, workspaceId }: Props) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <VideoIcon color="#7d7d7d" fill="#7d7d7d" />
-          <h2 className="text-[#bdbdbd]">Videos</h2>
+          <h2 className="text-[#bdbdbd]">All Videos</h2>
         </div>
       </div>
       <section

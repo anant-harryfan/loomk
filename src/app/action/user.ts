@@ -5,7 +5,7 @@ import { currentUser } from "@clerk/nextjs/server";
 // import nodemailer from "nodemailer"
 
 // export const sendEmail=(
-//   to: string, 
+//   to: string,
 //   subject: string,
 //   text?: string,
 //   html?: string
@@ -44,7 +44,17 @@ export const onAuthenticateUser = async () => {
               clerkId: user.id,
             },
           },
+          select:{
+            htmlc: true
+          }
         },
+        channel:{
+          where:{
+            User:{
+              clerkId: user.id
+            }
+          }
+        }
       },
     });
 
@@ -67,8 +77,19 @@ export const onAuthenticateUser = async () => {
           create: {
             name: `${user.firstName}'s borepanti`,
             type: "PERSONAL",
+            htmlc: {
+              create: {code: ``}
+            }
           },
         },
+        channel:{
+          create:{
+            name: `chatomaharaj`
+
+          }
+          
+        }
+        
       },
       include: {
         workspace: true,
@@ -105,7 +126,7 @@ export const getNotifications = async () => {
       },
     });
     if (notifications && notifications.notifications.length > 0)
-      return { status: 200, data: notifications };
+      return { status: 200, data: notifications.notifications };
     //console.log(notifications, 404);
     return { status: 404, data: [0] };
   } catch (error) {
@@ -113,7 +134,6 @@ export const getNotifications = async () => {
     return { status: 400, data: [] };
   }
 };
-
 
 export const getFirstView = async () => {
   try {
@@ -164,28 +184,28 @@ export const createCommentAndReply = async (
   commentId?: string | undefined
 ) => {
   try {
-    if(commentId){
+    if (commentId) {
       //console.log(commentId, "YE HAI TERE BAP KA COMMENT")
-    const reply = await client.comment.update({
-      where: {
-        id: commentId,
-      },
-      data: {
-        reply: {
-          create: {
-            comment,
-            userId,
-            videoId,
+      const reply = await client.comment.update({
+        where: {
+          id: commentId,
+        },
+        data: {
+          reply: {
+            create: {
+              comment,
+              userId,
+              videoId,
+            },
           },
         },
-      },
-    });
-    //console.log("Reply", reply)
-    if (reply) {
-      return { status: 200, data: "Reply posted" };
+      });
+      //console.log("Reply", reply)
+      if (reply) {
+        return { status: 200, data: "Reply posted" };
+      }
     }
-  }
-//console.log('ye hai ham new comment ke uper')
+    //console.log('ye hai ham new comment ke uper')
     const newComment = await client.video.update({
       where: {
         id: videoId,
@@ -228,6 +248,34 @@ export const getUserProfile = async () => {
   }
 };
 
+export const getAllVideo = async () => {
+ try{ const user = await currentUser();
+  if (!user) return { status: 404 };
+  const allV = await client.user.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+    select: {
+      videos: {
+        select:{
+          title: true,
+          description: true, 
+          createdAt: true,
+          source: true,
+          id: true,
+          processing: true,
+        }
+      }
+    },
+  });
+  if (allV) return { status: 200, data: allV.videos };
+return{status: 404, data: 'no video'}
+}catch(error){
+  console.log(error)
+  return {status: 500}
+}
+};
+
 export const getVideoComments = async (Id: string) => {
   try {
     const comments = await client.comment.findMany({
@@ -244,117 +292,68 @@ export const getVideoComments = async (Id: string) => {
         User: true,
       },
     });
-// //console.log(comments, 'COMMENTSSSSS')
- return { status: 200, data: comments };
+    // //console.log(comments, 'COMMENTSSSSS')
+    return { status: 200, data: comments };
   } catch (error) {
     return { status: 500 };
   }
 };
 
-
-
-
 export const inviteMembers = async (
-  workspaceId: string, recieverId: string
+  workspaceId: string,
+  recieverId: string
 ) => {
   try {
-    const user = await currentUser()
-    if (!user) return { status: 404 }
+    const user = await currentUser();
+    if (!user) return { status: 404 };
     //console.log('send info ke uper')
     const senderInfo = await client.user.findUnique({
       where: {
-        clerkId: user.id
+        clerkId: user.id,
       },
       select: {
-        id: true
-      }
-    })
+        id: true,
+      },
+    });
     if (senderInfo?.id) {
       //console.log("sendInfo.id confirm", senderInfo?.id)
       const workspace = await client.workSpace.findUnique({
         where: {
-          id: workspaceId
+          id: workspaceId,
         },
         select: {
-          name: true
-        }
-      })
+          name: true,
+        },
+      });
       if (workspace) {
         //console.log("workspace confirm", workspace)
         const invitation = await client.invite.create({
           data: {
-            senderId: senderInfo.id, 
+            senderId: senderInfo.id,
             receiverId: recieverId,
             workSpaceId: workspaceId,
-            content: `a url send you a url to invert the if of a url, ${workspace.name}`
+            content: `a url send you a url to invert the if of a url, ${workspace.name}`,
           },
-          select:{
+          select: {
             id: true,
-
-          }
-        })
-     const notification =  await client.user.update({
-          where:{
+          },
+        });
+        const notification = await client.user.update({
+          where: {
             clerkId: user.id,
           },
-            data:{
-              notifications: {
-                create:{
-                  content:`abe is wale url pe ja, `
-                }
-              }
-            }
-        })
+          data: {
+            notifications: {
+              create: {
+                content: `abe is wale url pe ja, `,
+              },
+            },
+          },
+        });
         //console.log('workspace ke nichhe', notification)
       }
       //console.log('senderinfo wala khatam')
     }
     //console.log('hogaya')
-  } catch (error) {
-
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  } catch (error) {}
+};

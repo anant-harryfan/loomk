@@ -12,9 +12,9 @@ export const verifyAcessToWorkspace = async (workspaceId: string) => {
     const isUserInWorkspace = await client.workSpace.findUnique({
       where: {
         id: workspaceId,
-            User: {
-              clerkId: user.id,
-            },
+        User: {
+          clerkId: user.id,
+        },
       },
     });
     //console.log(` ISUSERINWORKSPACE???::::::     ${isUserInWorkspace}`);
@@ -72,11 +72,11 @@ export const getAllUserVideos = async (workSpaceId: string) => {
         createdAt: true,
         source: true,
         processing: true,
-        Folder:{
-          select:{
+        Folder: {
+          select: {
             id: true,
-            name:true
-          }
+            name: true,
+          },
         },
         User: {
           select: {
@@ -92,7 +92,6 @@ export const getAllUserVideos = async (workSpaceId: string) => {
     });
     //console.log(videos.length, '1 bar chal bas ye hai video');
     if (videos && videos.length > 0) {
-      
       return { status: 200, data: videos };
     }
 
@@ -257,92 +256,166 @@ export const movewVideoLocation = async (
 ) => {
   try {
     const location = await client.video.update({
-      where:{
-        id: videoId
+      where: {
+        id: videoId,
       },
-      data:{
-        folderId: folderId||null,
+      data: {
+        folderId: folderId || null,
         workSpaceId,
+      },
+    });
+    if (location)
+      return {
+        status: 200,
+        data: "folder rename sucessfull(can take the data here also)",
+      };
+    return {
+      status: 404,
+      data: "ye kaise kiya mujhe bhi sikha, no folder ke nam change",
+    };
+  } catch (error) {
+    return { status: 500, data: "ye server side error hai, ho jaega sahi" };
+  }
+};
+
+export const getPreviewVideo = async (videoId: string) => {
+  try {
+    const user = await currentUser();
+    if (!user) return { status: 404 };
+
+    const video = await client.video.findUnique({
+      where: {
+        id: videoId,
+      },
+      select: {
+        title: true,
+        createdAt: true,
+        source: true,
+        description: true,
+        processing: true,
+        views: true,
+        summary: true,
+        User: {
+          select: {
+            firstname: true,
+            lastname: true,
+            image: true,
+            clerkId: true,
+            trial: true,
+            subscription: {
+              select: {
+                plan: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (video) {
+      return {
+        status: 200,
+        data: video,
+        author: user.id == video.User?.clerkId ? true : false,
+      };
+    }
+
+    return { status: 404, data: "no Video" };
+  } catch (error) {
+    return { status: 500 };
+  }
+};
+export const getInvite = async (workspaceId: string) => {
+  try {
+    const workspace = await client.workSpace.findUnique({
+      where: {
+        id: workspaceId,
+      },
+      select: {
+        name: true,
+        createdAt: true,
+        videos: true,
+      },
+    });
+    if (workspace) {
+      return {
+        status: 200,
+        data: workspace,
+      };
+    }
+
+    return { status: 404, data: "no workspace" };
+  } catch (error) {
+    return { status: 500 };
+  }
+};
+
+export const saveHtmlc = async (workspaceId: string, htmlContent: string) => {
+  try {
+    // console.log("iske uper hai")
+    const dekhhtml = await client.htmlc.findUnique({
+      where:{
+      
+        workSpaceId: workspaceId
       }
     })
-    if (location) return{status: 200, data: 'folder rename sucessfull(can take the data here also)'}
-    return {status: 404, data:'ye kaise kiya mujhe bhi sikha, no folder ke nam change'}
+    if (dekhhtml){
+    const savedHtmlc = await client.htmlc.update({
+     where:{
+      workSpaceId: workspaceId
+     },
+      data: {
+        code: htmlContent,  // Store HTML content  
+      }
+    });
+
+    return(console.log("chal gaya")
+    , {
+      status: 200,
+      data: {
+        htmlcId: savedHtmlc.id,
+        htmlc:saveHtmlc
+      }
+    })
+  }
+
+  const createhtm = await client.htmlc.create({
+    data:{
+      code: htmlContent,
+      workSpaceId: workspaceId
+    }
+  })
+  if (createhtm)return({status: 200, data:createhtm})
   } catch (error) {
-    return{status: 500, data:'ye server side error hai, ho jaega sahi'}
+    console.error("HTML save error:", {
+      message: error instanceof Error ? error.message : "Unknown error",
+      stack: error instanceof Error ? error.stack : undefined
+    });
+
+
+
+    return (console.log("nahi chala"), {
+      status: 500,
+      data: "Failed to save HTML content. Please try again later."
+    });
   }
 };
 
 
-export const getPreviewVideo = async (videoId: string)=>{
-try {
-  const user = await currentUser()
-  if (!user) return { status: 404 };
 
-  const video = await client.video.findUnique ({
-    where:{
-    id: videoId
-    },
-    select:{
-      title: true,
-      createdAt: true,
-      source: true,
-      description: true,
-      processing: true,
-      views: true,
-      summary: true,
-      User:{
-        select:{
-          firstname: true,
-          lastname: true,
-          image: true,
-          clerkId: true,
-          trial: true,
-          subscription:{
-            select:{
-              plan: true
-            }
-          }
-        }
-      }
-    }
-  })
-  if(video){
-    return{
-      status: 200,
-      data: video,
-      author: user.id == video.User?.clerkId?true: false,
-    }
-  }
-  
-  return{status: 404, data: 'no Video'}
-} catch (error) {
-  return{status: 500}
-}
-}
-export const getInvite = async (workspaceId: string)=>{
-try {
-
-
-  const workspace = await client.workSpace.findUnique ({
-    where:{
-    id: workspaceId
-    },
-    select:{
-      name: true,
-      createdAt: true,
-      videos: true,
-      }
-    }
-  )
-  if(workspace){
-    return{
-      status: 200,
-      data: workspace,
-    }
-  }
-  
-  return{status: 404, data: 'no workspace'}
-} catch (error) {
-  return{status: 500}
-}
-}
+  // export const gethtm = async (workSpaceid: string) => {
+  //   try {
+  //     // const dekh = await client.htmlc.findUnique({
+  //     //   where: {
+  //     //     workSpaceId: workSpaceid
+  //     //   },
+  //     //   select: {
+  //     //     code: true
+  //     //   }
+  //     // })
+  //     // if (dekh) return ({ data: dekh, status: 200 })
+  //     return "333"
+  //   }
+  //   catch (e) {
+  //     return ({ status: 500, data: e })
+  //   }
+  // }

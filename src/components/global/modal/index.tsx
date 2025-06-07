@@ -20,7 +20,7 @@ const Modal = ({ children, description, title, className, trigger, size }: Props
             >
                 {trigger}
             </DialogTrigger>
-            <DialogContent className={`${size}`} >
+            <DialogContent className={`${size} bg-black`} >
             <DialogHeader>
                 <DialogTitle>{title}</DialogTitle>
                 <DialogDescription>{description}</DialogDescription>
