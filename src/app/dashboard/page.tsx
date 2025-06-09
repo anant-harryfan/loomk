@@ -12,7 +12,7 @@ const DashboardPage = async (props: Props) => {
     if (auth.status === 201 || auth.status === 200) {
         
         const user = auth.user;
-        return redirect(`/dashboard/${user?.workspace[0].id}`)
+        return redirect(`/dashboard/${user?.workspace[0]}`)
     }
 
     return redirect('/auth/DashboardPageReturn')

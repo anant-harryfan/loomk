@@ -1,5 +1,8 @@
+
+"use client"
 import React from 'react'
 import MapComponent from './maplayout'
+import { redirect } from 'next/navigation'
 
 type Props = {}
 
@@ -20,6 +23,8 @@ const page = (props: Props) => {
               <iframe src="https://indiancolumbus.blogspot.com/2022/10/gangaikondan-kailasanathar-temple.html" width="560" height="384" ></iframe>
               
           </div> */}
+          
+          
     </div>
   )
 }

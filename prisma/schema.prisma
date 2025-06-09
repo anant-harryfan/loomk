@@ -28,6 +28,7 @@ model User {
   comment        Comment[]
   channel        Channel[] // Server[]
   chatpage       ChatPage[]
+  research       research[]
 }
 
 // model Server{
@@ -188,6 +189,13 @@ model htmlc{
   WorkSpace    WorkSpace? @relation(fields: [workSpaceId], references: [id])
   workSpaceId  String?   @db.Uuid  @unique
   code          String   @default("a")
+}
+
+model research{
+   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    User         User?     @relation(fields: [userId], references: [id])
+  userId       String?   @db.Uuid 
+  code        String    
 }
 
 enum Type {
