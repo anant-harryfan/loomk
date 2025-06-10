@@ -8,7 +8,7 @@ type Props = {}
 
 const page = (props: Props) => {
   return (
-    <div className='h-screen w-screen'>
+    <div className='h-screen w-screen '>
           <MapComponent />
           {/* <div className='block'>
               <iframe src="https://sanskritdocuments.org/doc_devii/tAmraparNImAhAtmyam.html"></iframe>

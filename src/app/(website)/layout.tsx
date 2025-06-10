@@ -7,7 +7,7 @@ type Props = {
 
 const layout = ({ children }: Props) => {
     return (
-        <div className=" bg-white">
+        <div className=" bg-white no-scrollbar">
             <LandingPageNavbar/>
             {children }
         </div>

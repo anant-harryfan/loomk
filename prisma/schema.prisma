@@ -107,7 +107,6 @@ model WorkSpace {
   htmlc       htmlc[]
 }
 // model WorkSpacePreview{
-  
 // }
 model Folder{
   id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
@@ -213,7 +212,17 @@ enum SUBSCRIPTION_PLAN {
   FREE
 }
 
-// model india{
+  model MyVideo{
+    id  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  }
+
+  model som{
+    id  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    Shaeri String[] 
+    
+  }
+// model jambudweep{
 //     id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 //     code   String
 //     archrya prafula chandra ray

@@ -18,7 +18,7 @@ export default function HomePage() {
   );
 
   return (
-    <div>
+    <div className="no-scrollbar">
       <Carousel
         // plugins={[plugin.current]}
         className="resize-y"
