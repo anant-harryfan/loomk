@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Ship } from "lucide-react";
 import React from "react";
 import Folder from "./folder";
-import { getWorkspaceFolders } from "@/app/action/workspace";
+import { getWorkspaceFolders } from "@/app/dashboard/action/workspace";
 import { useQueryData } from "@/hooks/useQueryData";
 import { useMutationDataState } from "@/hooks/useMutationData";
 import { number } from "zod";

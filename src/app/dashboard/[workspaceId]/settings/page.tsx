@@ -1,5 +1,5 @@
 'use client'
-import { enableFirstView, getFirstView } from '@/app/action/user'
+import { enableFirstView, getFirstView } from '@/app/dashboard/action/user'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { useTheme } from 'next-themes'

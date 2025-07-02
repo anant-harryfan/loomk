@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { getWorkSpaces } from "@/app/action/workspace";
+import { getWorkSpaces } from "@/app/dashboard/action/workspace";
 import { NotificationProps, WorkSpaceProps } from "@/types/index.type";
 import { Select, SelectItem } from "@/components/ui/select";
 import {
@@ -19,7 +19,7 @@ import Search from "../search-user";
 import { useQueryData } from "@/hooks/useQueryData";
 import { MENU_ITEMS } from "@/constants";
 import SideBarItem from "./sidebar-item";
-import { getNotifications } from "@/app/action/user";
+import { getNotifications } from "@/app/dashboard/action/user";
 import WorkspacePlaceHolder from "./workspace-placeholder";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";

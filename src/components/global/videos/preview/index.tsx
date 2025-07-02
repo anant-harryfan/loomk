@@ -1,5 +1,5 @@
 "use client";
-import { getPreviewVideo } from "@/app/action/workspace";
+import { getPreviewVideo } from "@/app/dashboard/action/workspace";
 import {
   ResizableHandle,
   ResizablePanel,

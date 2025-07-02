@@ -1,5 +1,5 @@
 
-import { getAllUserVideos, getFolderInfo } from '@/app/action/workspace'
+import { getAllUserVideos, getFolderInfo } from '@/app/dashboard/action/workspace'
 import FolderInfo from '@/components/global/folders/folder-info'
 import Videos from '@/components/global/videos'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'

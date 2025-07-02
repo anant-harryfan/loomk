@@ -1,5 +1,5 @@
 "use client"
-import { getAllVideo } from '@/app/action/user';
+import { getAllVideo } from '@/app/dashboard/action/user';
 import CreateChannel from '@/components/global/chatapp/create-channels'
 import VideoCard from '@/components/global/videos/video-card';
 import { DraggableCardBody, DraggableCardContainer } from '@/components/ui/draggable-card';
@@ -28,7 +28,8 @@ const MujhChat = (props: Props) => {
     
 
   return (
-    <div className='w-full  bg-red-700'>
+    <div className='w-full h-full overflow-scroll  '>
+      <div className=' w-full h-full '>
       <DraggableCardContainer className="relative flex  items-center justify-center ">
       <section
         className={cn(
@@ -50,9 +51,15 @@ const MujhChat = (props: Props) => {
         <p className="text-[#575656]">aayega thodi deer me ruk</p>
       )} 
       </section>
+            
+  
+            
       </DraggableCardContainer>
-        
-
+        <div className='scale-50'>
+        <iframe draggable={true} className='size-200 rounded-4xl  resize' src="videoEditor">Videoeditor ka preview tha kam nahi kiya</iframe>
+        <iframe draggable={true} className='size-100 aspect-square   resize'  src="/JHAMBUDWEEPA/Research/" >JHAMBUDWEEPA/Research/</iframe>
+    </div>
+    </div>
     </div>
   )
 }

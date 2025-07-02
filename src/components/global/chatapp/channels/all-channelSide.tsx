@@ -1,5 +1,5 @@
 "use client"
-import { getChannels } from '@/app/action/chat';
+import { getChannels } from '@/app/dashboard/action/chat';
 import { useQueryData } from '@/hooks/useQueryData';
 import { ChannelChatams, UserChannel } from '@/types/index.type';
 import React from 'react'

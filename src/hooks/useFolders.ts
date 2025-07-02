@@ -4,7 +4,7 @@ import { useMutationData } from "./useMutationData";
 import {
   getWorkspaceFolders,
   movewVideoLocation,
-} from "@/app/action/workspace";
+} from "@/app/dashboard/action/workspace";
 import useZodForm from "./useZodForm";
 import { moveVideoSchema } from "@/components/global/change-videolocation/changeLSchema";
 

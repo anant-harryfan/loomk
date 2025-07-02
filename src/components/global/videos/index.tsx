@@ -1,5 +1,5 @@
 "use client";
-import { getAllUserVideos } from "@/app/action/workspace";
+import { getAllUserVideos } from "@/app/dashboard/action/workspace";
 import { useQueryData } from "@/hooks/useQueryData";
 import { cn } from "@/lib/utils";
 import { VideosProps } from "@/types/index.type";

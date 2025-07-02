@@ -1,6 +1,6 @@
 "use client";
 
-import { saveHtmlc } from "@/app/action/workspace";
+import { saveHtmlc } from "@/app/dashboard/action/workspace";
 import { Button } from "@/components/ui/button";
 // import { createHtmlc } from "@/app/action/workspace";
 import React, { useState, useRef, useEffect, Children } from "react";
@@ -88,10 +88,13 @@ const VideoEditor = ({ workspaceId }: Props) => {
             style.contentEditable = "true";
             let hode = document.getElementsByClassName('ddo')[0]
             hode.appendChild(style)
+            style.id =`${ index}`
             style.draggable = true
             style.onmousemove = (e) => { if (e.buttons == 3) { style.remove() } }
             style.onmousedown = (e) => { if (e.buttons == 3) { style.remove() } }
-
+            style.onchange = () => { console.log("yehua") }
+            
+            
         }
 
         setIsDrawing(false);
@@ -169,6 +172,7 @@ const VideoEditor = ({ workspaceId }: Props) => {
     // if(localStorage.getItem("dunno")){
     //   document.get.innerHTML = localStorage.getItem("dunno")
     // }
+   
     const marku = {__html: `${localStorage.getItem('dunno') }`}
     return (
 <div>
@@ -183,7 +187,7 @@ const VideoEditor = ({ workspaceId }: Props) => {
             id="hahaha"
             // draggable={true}
            
-            className="bg-amber-900 bg-imag h-svw ddo  w-svw relative overflow-y-scroll"
+            className="bg-black bg-imag h-svw ddo  w-svw relative overflow-y-scroll"
         >
 
 
@@ -192,6 +196,7 @@ const VideoEditor = ({ workspaceId }: Props) => {
             {isDrawing && (
                 <div
                     className="absolute bg-[#35352d57]  bg-opacity-50 shadow-2xl shadow-black text-white z-[1000000000000000000000]"
+                    
                     style={{
                         left: Math.min(startPos.x, mousePosition.x),
                         top: Math.min(startPos.y, mousePosition.y),

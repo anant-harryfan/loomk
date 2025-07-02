@@ -1,5 +1,5 @@
-import { getUserProfile, getVideoComments } from '@/app/action/user'
-import { getPreviewVideo } from '@/app/action/workspace'
+import { getUserProfile, getVideoComments } from '@/app/dashboard/action/user'
+import { getPreviewVideo } from '@/app/dashboard/action/workspace'
 import VideoPreview from '@/components/global/videos/preview'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import React from 'react'

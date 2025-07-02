@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    // <ClerkProvider>
       <html lang="en" suppressHydrationWarning >
         <body
           className={`${manrope.className} no-scrollbar bg-black antialiased`}
@@ -47,6 +47,6 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
+    // /* </ClerkProvider> */
   );
 }

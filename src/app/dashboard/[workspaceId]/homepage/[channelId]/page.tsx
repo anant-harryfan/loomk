@@ -1,5 +1,5 @@
 
-import { getAllChatam, getChannels } from '@/app/action/chat'
+import { getAllChatam, getChannels } from '@/app/dashboard/action/chat'
 import ChannelPreview from '@/components/global/chatapp/channelPreview'
 import AllChannelSideBar from '@/components/global/chatapp/channels/all-channelSide'
 import ChannelInfo from '@/components/global/chatapp/channels/channel-info'

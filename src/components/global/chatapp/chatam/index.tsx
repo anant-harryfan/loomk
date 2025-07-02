@@ -1,5 +1,5 @@
 
-import { getAllChatam } from "@/app/action/chat";
+import { getAllChatam } from "@/app/dashboard/action/chat";
 import { useQueryData } from "@/hooks/useQueryData";
 import { ChannelChatams } from "@/types/index.type";
 import React, { IframeHTMLAttributes } from "react";

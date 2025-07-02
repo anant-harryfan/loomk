@@ -1,5 +1,5 @@
 "use client"
-import { getWorkSpaces } from '@/app/action/workspace'
+import { getWorkSpaces } from '@/app/dashboard/action/workspace'
 import { useQueryData } from '@/hooks/useQueryData'
 import React from 'react'
 import Modal from '../modal'

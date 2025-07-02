@@ -1,4 +1,4 @@
-import { createWorkspace } from "@/app/action/workspace"
+import { createWorkspace } from "@/app/dashboard/action/workspace"
 import { useMutationData } from "./useMutationData"
 import useZodForm from "./useZodForm"
 import { workspaceSchema } from "@/components/global/forms/workspace-form/schema"

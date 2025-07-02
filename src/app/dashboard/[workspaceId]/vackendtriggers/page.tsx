@@ -1,5 +1,5 @@
 'use client'
-import { getNotifications } from '@/app/action/user'
+import { getNotifications } from '@/app/dashboard/action/user'
 import { DraggableCardBody, DraggableCardContainer } from '@/components/ui/draggable-card'
 import { useQueryData } from '@/hooks/useQueryData'
 import {  NotificationT } from '@/types/index.type'

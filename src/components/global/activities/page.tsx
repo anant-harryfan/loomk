@@ -2,7 +2,7 @@ import React from 'react'
 import CommentForm from '../forms/comment-form'
 import CommentCard from '../comment-card'
 import { useQueryData } from '@/hooks/useQueryData'
-import { getVideoComments } from '@/app/action/user'
+import { getVideoComments } from '@/app/dashboard/action/user'
 import { VideoCommentProps } from '@/types/index.type'
 
 type Props = {

@@ -1,5 +1,5 @@
 "use client"
-import { getAllChatam } from '@/app/action/chat'
+import { getAllChatam } from '@/app/dashboard/action/chat'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import React from 'react'
 import ChannelInfo from './channel-info'

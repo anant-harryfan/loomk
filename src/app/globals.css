@@ -198,6 +198,12 @@
   background-repeat: no-repeat;
 
 }
+.bg-apna{
+  background-image: url('https://media.discordapp.net/attachments/1382455121736372315/1382455416818241616/image.png?ex=684b3770&is=6849e5f0&hm=334b6e7b4eba97f1a412a0ad077d30c92a430bce37845a0a0af2f7afcaf602e4&=&format=webp&quality=lossless');
+  background-repeat: no-repeat;
+  background-size: contain;
+  
+}
 
 .snippet--gradient {
   background-image: linear-gradient(to bottom,

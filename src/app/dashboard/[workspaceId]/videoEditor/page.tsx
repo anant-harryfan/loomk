@@ -13,7 +13,7 @@ const page = async ({ params: { workspaceId } }: Props) => {
 
   return (
     <div>
- {workspaceId}
+ {/* {workspaceId} */}
         <VideoEditor workspaceId={workspaceId} />
 
       

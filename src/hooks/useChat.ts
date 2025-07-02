@@ -2,7 +2,7 @@ import { createCommentSchema } from "@/components/global/forms/comment-form/sche
 import { useMutationData } from "./useMutationData";
 import { useQueryData } from "./useQueryData";
 import useZodForm from "./useZodForm";
-import { createChatam } from "@/app/action/chat";
+import { createChatam } from "@/app/dashboard/action/chat";
 import { createChatamSchema } from "@/components/global/chatapp/channelPreview/schema";
 
 

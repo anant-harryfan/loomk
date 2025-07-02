@@ -1,5 +1,5 @@
 "use client"
-import { getWorkspaceFolders } from "@/app/action/workspace";
+import { getWorkspaceFolders } from "@/app/dashboard/action/workspace";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";

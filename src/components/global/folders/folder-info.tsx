@@ -1,5 +1,5 @@
 "use client"
-import { getFolderInfo, renameFolders } from '@/app/action/workspace'
+import { getFolderInfo, renameFolders } from '@/app/dashboard/action/workspace'
 import { Input } from '@/components/ui/input'
 import { useMutationData, useMutationDataState } from '@/hooks/useMutationData'
 import { useQueryData } from '@/hooks/useQueryData'

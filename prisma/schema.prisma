@@ -183,6 +183,13 @@ model files {
   workSpaceId  String?   @db.Uuid
 }
 
+model info {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title        String 
+  link         String 
+  code         String
+}
+
 model htmlc{
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   WorkSpace    WorkSpace? @relation(fields: [workSpaceId], references: [id])
@@ -195,6 +202,13 @@ model research{
     User         User?     @relation(fields: [userId], references: [id])
   userId       String?   @db.Uuid 
   code        String    
+  date        String
+  Edit        String
+}
+model leftout{
+   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+   date        String 
+   deleat      Boolean
 }
 
 enum Type {
@@ -212,16 +226,21 @@ enum SUBSCRIPTION_PLAN {
   FREE
 }
 
-  model MyVideo{
-    id  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+model userupi{
+  id  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  img  String @unique 
+  upiId String 
+}
+  // model MyVideo{
+  //   id  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
-  }
+  // }
 
-  model som{
-    id  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    Shaeri String[] 
+  // model som{
+  //   id  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  //   Shaeri String[] 
     
-  }
+  // }
 // model jambudweep{
 //     id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 //     code   String

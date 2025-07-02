@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { User } from "lucide-react";
 import React from "react";
 import Loader from "../loader";
-import { inviteMembers } from "@/app/action/user";
+import { inviteMembers } from "@/app/dashboard/action/user";
 
 type Props = {
   workspaceid: string;
